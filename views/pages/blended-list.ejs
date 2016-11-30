@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+        <script>
+            var load = null;
+            var del = null;
+
+            $(document).ready(function() {
+                //작성된 메모 목록을 로드합니다.
+                var load = function() {
+                    $.get('/load', function(data) {
+                        $("#blend").empty();
+
+                        $(data).each(function(i) {
+                            var id = this._id;
+
+                            $("#blend").prepend("<div class='item'></div>");
+
+                            $("#blend .item:first").append("<div class='app_title'><b>" + this.app_title + "</b> (" + this.date +
+                                ")&nbsp;&nbsp; | <span class='text_button del'>DELETE</span></div>");
+                            $("#blend .item:first").append("<div class='contents " + id + "'>" + this.contents + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function1 + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function2 + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function3 + "</div>");
+                            $("#blend .item:first").append("<div class='app_color '>" + this.app_color + "</div>");
+
+                            //삭제 버튼을 눌렀을 때에 대한 이벤트 콜백함수를 지정합니다.
+                            $("#blend .item:first .del").click(function(evt) {
+                                del(id);
+                            });
+                        });
+                    });
+                };
+
+                //메모 삭제 요청을 처리하는 부분입니다.
+                var del = function(id) {
+                    var postdata = {
+                        '_id': id
+                    };
+
+                    $.post('/del', postdata, function() {
+                        load();
+                    });
+                };
+
+                load();
+            });
+        </script>
+</head>
+
+<body>
+    <div id='blend'>
+        <div class='item'>
+        </div>
+    </div>
+    <% include ../partials/body_script %>
+</body>
+
+</html>
