@@ -5,7 +5,11 @@ var Schema = mongoose.Schema;
 
 //메모 모델을 정의합니다.
 var Memo = new Schema({
-	author: String,
+	app_title: String,
+	app_function1: Boolean,
+	app_function2: Boolean,
+	app_function3: Boolean,
+	app_color: String,
 	contents: String,
 	date: Date
 });
@@ -27,13 +31,22 @@ exports.load = function(req, res) {
 
 //메모 쓰기 요청을 처리합니다.
 exports.write = function(req, res) {
-	var author = req.body.author;
+	var app_title = req.body.app_title;
+	var app_function1 = req.body.app_function1;
+	var app_function2 = req.body.app_function2;
+	var app_function3 = req.body.app_function3;
+	var app_color = req.body.app_color;
+
 	var contents = req.body.contents;
 	var date = Date.now();
 
 	var memo = new memoModel();
 
-	memo.author = author;
+	memo.app_title = app_title;
+	memo.app_function1 = app_function1;
+	memo.app_function2 = app_function2;
+	memo.app_function3 = app_function3;
+	memo.app_color = app_color;
 	memo.contents = contents;
 	memo.date = date;
 	memo.comments = [];
@@ -58,31 +71,6 @@ exports.del = function(req, res) {
 		}
 		else {
 			res.json({status: "SUCCESS"});
-		}
-	});
-};
-
-//메모 수정 요청을 처리합니다.
-exports.modify = function(req, res) {
-	var _id = req.body._id;
-	var contents = req.body.contents;
-
-
-	memoModel.findOne({_id: _id}, function(err, memo) {
-		if (err) {
-			throw err;
-		}
-		else {
-			memo.contents = contents;
-
-			memo.save(function (err) {
-				if (err) {
-					throw err;
-				}
-				else {
-					res.json({status: "SUCCESS"});
-				}
-			});
 		}
 	});
 };

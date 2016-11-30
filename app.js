@@ -31,7 +31,6 @@ app.use('/users', users);
 
 app.get('/load', memo.load);
 app.post('/write', memo.write);
-app.post('/modify', memo.modify);
 app.post('/del', memo.del);
 
 // catch 404 and forward to error handler
