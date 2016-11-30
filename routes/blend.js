@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
-var db = mongoose.connect('mongodb://localhost/rst_memo');
+var db = mongoose.connect('mongodb://localhost/rst_blend');
 var Schema = mongoose.Schema;
 
 //메모 모델을 정의합니다.
-var Memo = new Schema({
+var Blend = new Schema({
 	app_title: String,
 	app_function1: Boolean,
 	app_function2: Boolean,
@@ -14,7 +14,7 @@ var Memo = new Schema({
 	date: Date
 });
 
-var memoModel = mongoose.model('Memo', Memo);
+var blendModel = mongoose.model('Blend', Blend);
 
 exports.index = function(req, res){
 	res.render('index', { title: 'Express' });
@@ -22,7 +22,7 @@ exports.index = function(req, res){
 
 //모든 메모 목록을 반환합니다.
 exports.load = function(req, res) {
-	memoModel.find({}, function(err, data) {
+	blendModel.find({}, function(err, data) {
 		console.log(data);
 
 		res.json(data);
@@ -40,18 +40,18 @@ exports.write = function(req, res) {
 	var contents = req.body.contents;
 	var date = Date.now();
 
-	var memo = new memoModel();
+	var blend = new blendModel();
 
-	memo.app_title = app_title;
-	memo.app_function1 = app_function1;
-	memo.app_function2 = app_function2;
-	memo.app_function3 = app_function3;
-	memo.app_color = app_color;
-	memo.contents = contents;
-	memo.date = date;
-	memo.comments = [];
+	blend.app_title = app_title;
+	blend.app_function1 = app_function1;
+	blend.app_function2 = app_function2;
+	blend.app_function3 = app_function3;
+	blend.app_color = app_color;
+	blend.contents = contents;
+	blend.date = date;
+	blend.comments = [];
 
-	memo.save(function (err) {
+	blend.save(function (err) {
 		if (err) {
 			throw err;
 		}
@@ -65,7 +65,7 @@ exports.write = function(req, res) {
 exports.del = function(req, res) {
 	var _id = req.body._id;
 
-	memoModel.remove({_id: _id}, function(err, result) {
+	blendModel.remove({_id: _id}, function(err, result) {
 		if (err) {
 			throw err;
 		}

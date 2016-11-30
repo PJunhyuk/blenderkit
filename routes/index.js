@@ -6,9 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('pages/index', { title: 'Blenderkit' });
 });
 
-/* make route to memo page */
-router.get('/memo', function(req, res, next) {
-  res.render('pages/memo', { title: 'Blenderkit' });
+/* make route to blend page */
+router.get('/blend', function(req, res, next) {
+  res.render('pages/blend', { title: 'Blenderkit' });
 });
 
 module.exports = router;

@@ -14,23 +14,23 @@
                 //작성된 메모 목록을 로드합니다.
                 var load = function() {
                     $.get('/load', function(data) {
-                        $("#memo").empty();
+                        $("#blend").empty();
 
                         $(data).each(function(i) {
                             var id = this._id;
 
-                            $("#memo").prepend("<div class='item'></div>");
+                            $("#blend").prepend("<div class='item'></div>");
 
-                            $("#memo .item:first").append("<div class='app_title'><b>" + this.app_title + "</b> (" + this.date +
+                            $("#blend .item:first").append("<div class='app_title'><b>" + this.app_title + "</b> (" + this.date +
                                 ")&nbsp;&nbsp; | <span class='text_button del'>DELETE</span></div>");
-                            $("#memo .item:first").append("<div class='contents " + id + "'>" + this.contents + "</div>");
-                            $("#memo .item:first").append("<div class='app_function '>" + this.app_function1 + "</div>");
-                            $("#memo .item:first").append("<div class='app_function '>" + this.app_function2 + "</div>");
-                            $("#memo .item:first").append("<div class='app_function '>" + this.app_function3 + "</div>");
-                            $("#memo .item:first").append("<div class='app_color '>" + this.app_color + "</div>");
+                            $("#blend .item:first").append("<div class='contents " + id + "'>" + this.contents + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function1 + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function2 + "</div>");
+                            $("#blend .item:first").append("<div class='app_function '>" + this.app_function3 + "</div>");
+                            $("#blend .item:first").append("<div class='app_color '>" + this.app_color + "</div>");
 
                             //삭제 버튼을 눌렀을 때에 대한 이벤트 콜백함수를 지정합니다.
-                            $("#memo .item:first .del").click(function(evt) {
+                            $("#blend .item:first .del").click(function(evt) {
                                 del(id);
                             });
                         });
@@ -40,11 +40,11 @@
                 //메모 쓰기 요청을 처리하는 부분입니다.
                 var write = function(contents) {
                     var app_color;
-                    if($("#app_color1").is(":checked"))
+                    if ($("#app_color1").is(":checked"))
                         app_color = 'color1';
-                    if($("#app_color2").is(":checked"))
+                    if ($("#app_color2").is(":checked"))
                         app_color = 'color2';
-                    if($("#app_color3").is(":checked"))
+                    if ($("#app_color3").is(":checked"))
                         app_color = 'color3';
 
                     var postdata = {
@@ -99,17 +99,17 @@
     <div id='main'>
         <div id='write'>
             <input id='app_title' class='app_title' type='text' value='AppTitle' />
-            <input name = "app_function1" id="app_function1" class="app_function" type="checkbox" />
-            <input name = "app_function2" id="app_function2" class="app_function" type="checkbox" />
-            <input name = "app_function3" id="app_function3" class="app_function" type="checkbox" />
-            <input name = "app_color" id="app_color1" class="app_color" type="radio" value="color1" />
-            <input name = "app_color" id="app_color2" class="app_color" type="radio" value="color2" />
-            <input name = "app_color" id="app_color3" class="app_color" type="radio" value="color3" />
+            <input name="app_function1" id="app_function1" class="app_function" type="checkbox" />
+            <input name="app_function2" id="app_function2" class="app_function" type="checkbox" />
+            <input name="app_function3" id="app_function3" class="app_function" type="checkbox" />
+            <input name="app_color" id="app_color1" class="app_color" type="radio" value="color1" checked />
+            <input name="app_color" id="app_color2" class="app_color" type="radio" value="color2" />
+            <input name="app_color" id="app_color3" class="app_color" type="radio" value="color3" />
             <textarea></textarea>
             <br />
             <input id='write_button' type='button' value='WRITE' />
         </div>
-        <div id='memo'>
+        <div id='blend'>
             <div class='item'>
             </div>
         </div>
