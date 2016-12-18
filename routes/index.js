@@ -16,4 +16,20 @@ router.get('/blended/list', function(req, res, next) {
   res.render('pages/blended-list', { title: 'Blenderkit' });
 });
 
+router.get('/cocktail', function(req, res, next) {
+  res.render('pages/cocktail', { title: 'Blenderkit' });
+});
+
+var sample = {app_title: ''};
+router.get('/cocktail/:app_title', function(req, res) {
+  sample.app_title = req.params.app_title;
+  res.render('pages/cocktail', { title: 'Blenderkit', app_title: sample.app_title });
+});
+
+// exports.geturl = function(url){
+//   router.get('/cocktail/' + url, function(req, res, next) {
+//     res.render('pages/cocktail', { title: 'Blenderkit' });
+//   });
+// };
+
 module.exports = router;
